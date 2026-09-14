@@ -1193,4 +1193,111 @@ body,
   75% { transform: translate(0, -32%) rotate(-8deg); }
 }
 
+@media (orientation: portrait) {
+  .ui-stage,
+  .butterfly-stage {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    aspect-ratio: auto;
+  }
+
+  .game-logo {
+    top: 1%;
+    left: 15%;
+    width: 70%;
+    height: 19%;
+  }
+
+  .question-progress {
+    top: 15.5%;
+    left: 3%;
+    width: 94%;
+    height: 13%;
+  }
+
+  .progress-flower {
+    top: 19%;
+    width: 7.5%;
+  }
+
+  .question-card {
+    top: 25%;
+    left: 2%;
+    width: 96%;
+    height: auto;
+    aspect-ratio: 635 / 386;
+  }
+
+  .question-card__prompt {
+    font-size: calc(4.1cqw * var(--game-font-scale, 1));
+  }
+
+  .shape-display--square,
+  .shape-display--rectangle,
+  .shape-display--circle,
+  .shape-display--diamond {
+    border-width: 2cqw;
+  }
+
+  .pattern-shape {
+    width: 7.4cqw;
+    height: 7.4cqw;
+    border-width: 1.05cqw;
+  }
+
+  .pattern-shape.shape-display--rectangle {
+    width: 10.5cqw;
+    height: 6.5cqw;
+  }
+
+  .pattern-question {
+    font-size: calc(7.4cqw * var(--game-font-scale, 1));
+  }
+
+  .mascot {
+    top: 46%;
+    left: 1%;
+    width: 24%;
+    height: 15%;
+  }
+
+  .answer-row {
+    top: 59%;
+    bottom: auto;
+    left: 2%;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1%;
+    width: 96%;
+    height: 13%;
+  }
+
+  .answer {
+    flex: 0 0 32.66%;
+    width: 32.66%;
+    height: 100%;
+  }
+
+  .answer span {
+    font-size: calc(3.35cqw * var(--game-font-scale, 1));
+  }
+
+  .butterfly {
+    width: 12%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .butterfly--left {
+    top: 40%;
+    left: 3%;
+  }
+
+  .butterfly--right {
+    top: 35%;
+    left: 84%;
+  }
+}
+
 </style>
