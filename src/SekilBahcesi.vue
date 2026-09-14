@@ -788,6 +788,7 @@ body,
 .garden-scene {
   position: relative;
   width: 100%;
+  height: 100vh;
   height: 100dvh;
   min-height: 100%;
   overflow: hidden;
@@ -809,10 +810,10 @@ body,
   position: absolute;
   top: 50%;
   left: 50%;
-  width: max(100vw, 177.683dvh);
-  height: max(56.28vw, 100dvh);
-  min-width: 100vw;
-  min-height: 100dvh;
+  width: min(100vw, 177.683vh);
+  width: min(100vw, 177.683dvh);
+  aspect-ratio: 1672 / 941;
+  container-type: inline-size;
   overflow: hidden;
   color: #5a260f;
   font-family: "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
@@ -827,10 +828,9 @@ body,
   z-index: 2;
   top: 50%;
   left: 50%;
-  width: max(100vw, 177.683dvh);
-  height: max(56.28vw, 100dvh);
-  min-width: 100vw;
-  min-height: 100dvh;
+  width: min(100vw, 177.683vh);
+  width: min(100vw, 177.683dvh);
+  aspect-ratio: 1672 / 941;
   overflow: hidden;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -914,7 +914,7 @@ body,
   width: 68%;
   margin: 0;
   color: #5a260f;
-  font-size: calc(clamp(16px, 1.45vw, 27px) * var(--game-font-scale, 1));
+  font-size: calc(1.615cqw * var(--game-font-scale, 1));
   font-weight: 900;
   line-height: 1.15;
   text-align: center;
@@ -931,7 +931,7 @@ body,
 .shape-display--rectangle,
 .shape-display--circle,
 .shape-display--diamond {
-  border: clamp(7px, 0.7vw, 13px) solid #10a9aa;
+  border: 0.778cqw solid #10a9aa;
 }
 
 .shape-display--square {
@@ -989,14 +989,14 @@ body,
 .pattern-shape {
   position: relative;
   flex: 0 0 auto;
-  width: clamp(24px, 3.2vw, 48px);
-  height: clamp(24px, 3.2vw, 48px);
-  border-width: clamp(3px, 0.38vw, 7px);
+  width: 2.871cqw;
+  height: 2.871cqw;
+  border-width: 0.419cqw;
 }
 
 .pattern-shape.shape-display--rectangle {
-  width: clamp(34px, 4.5vw, 68px);
-  height: clamp(22px, 2.8vw, 42px);
+  width: 4.067cqw;
+  height: 2.512cqw;
 }
 
 .pattern-shape.shape-display--diamond {
@@ -1006,7 +1006,7 @@ body,
 .pattern-question {
   min-width: 0.8em;
   color: #5a260f;
-  font-size: calc(clamp(28px, 3vw, 48px) * var(--game-font-scale, 1));
+  font-size: calc(2.871cqw * var(--game-font-scale, 1));
   font-weight: 900;
   line-height: 1;
 }
@@ -1052,7 +1052,7 @@ body,
   width: 80%;
   color: #5a260f;
   font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
-  font-size: calc(clamp(14px, 1.12vw, 21px) * var(--game-font-scale, 1));
+  font-size: calc(1.256cqw * var(--game-font-scale, 1));
   font-weight: 900;
   line-height: 1.08;
   text-align: center;
@@ -1191,66 +1191,6 @@ body,
   25% { transform: translate(0, 32%) rotate(8deg); }
   50% { transform: translate(-32%, 0) rotate(-2deg); }
   75% { transform: translate(0, -32%) rotate(-8deg); }
-}
-
-@media (max-aspect-ratio: 4 / 3) {
-  .ui-stage,
-  .butterfly-stage {
-    width: 100vw;
-    height: 100dvh;
-    min-width: 0;
-    min-height: 0;
-  }
-
-  .game-logo {
-    top: 2%;
-    left: 10%;
-    width: 80%;
-    height: 19%;
-  }
-
-  .question-progress {
-    top: 14%;
-    left: 4%;
-    width: 92%;
-    height: 15%;
-  }
-
-  .progress-flower {
-    top: 17.6%;
-    width: 7%;
-  }
-
-  .mascot {
-    top: 27%;
-    left: 1%;
-    width: 31%;
-    height: 28%;
-  }
-
-  .question-card {
-    top: 25%;
-    left: 22%;
-    width: 76%;
-    height: 37%;
-  }
-
-  .answer-row {
-    left: 4%;
-    bottom: 13%;
-    gap: 2%;
-    width: 92%;
-    height: 22%;
-  }
-
-  .answer {
-    width: 32%;
-    min-height: 44px;
-  }
-
-  .answer span {
-    font-size: calc(clamp(13px, 4vw, 19px) * var(--game-font-scale, 1));
-  }
 }
 
 </style>
