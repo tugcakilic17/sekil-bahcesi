@@ -220,6 +220,7 @@ const activeLevel = computed(() => (
 const availableQuestions = computed(() => questionSets[activeLevel.value])
 const currentQuestion = computed(() => availableQuestions.value[currentQuestionIndex.value])
 const flowerSlots = ['40.8%', '45.75%', '50.7%', '55.65%', '60.6%']
+const portraitFlowerSlots = ['25.25%', '35.85%', '46.45%', '57.25%', '68.05%']
 const liveSpeed = computed(() => {
   const value = Number(live.speed)
   return Number.isFinite(value) ? Math.min(200, Math.max(50, value)) : 100
@@ -318,11 +319,14 @@ class GardenScene extends Phaser.Scene {
       [645, 665], [760, 490], [842, 760], [955, 605], [1065, 520],
       [1160, 705], [1275, 570], [1390, 670], [1518, 525], [1580, 755],
       [285, 420], [705, 400], [1010, 445], [1325, 405],
+      [90, 790], [178, 625], [370, 820], [515, 475], [590, 790],
+      [735, 570], [900, 690], [1110, 805], [1215, 470], [1340, 790],
+      [1460, 610], [1615, 645], [470, 650], [1180, 610], [1505, 445],
     ]
 
     return anchors.map(([x, y], index) => {
       const depth = 0.76 + (index % 4) * 0.1
-      const glowScale = (0.25 + (index % 3) * 0.055) * depth
+      const glowScale = (0.27 + (index % 4) * 0.04) * depth
       const sprite = this.add
         .image(x, y, 'garden-glow')
         .setBlendMode(Phaser.BlendModes.ADD)
@@ -332,12 +336,12 @@ class GardenScene extends Phaser.Scene {
         sprite,
         baseX: x,
         baseY: y,
-        driftX: 9 + (index % 5) * 3,
-        driftY: 7 + ((index + 2) % 4) * 3,
+        driftX: 17 + (index % 6) * 4,
+        driftY: 13 + ((index + 2) % 5) * 4,
         phase: index * 1.73,
-        speed: 0.34 + (index % 6) * 0.045,
-        pulseSpeed: 1.05 + (index % 5) * 0.19,
-        baseAlpha: 0.48 + (index % 4) * 0.075,
+        speed: 0.42 + (index % 7) * 0.055,
+        pulseSpeed: 1.2 + (index % 6) * 0.22,
+        baseAlpha: 0.64 + (index % 4) * 0.08,
         baseScale: glowScale,
       }
     })
@@ -624,13 +628,13 @@ class GardenScene extends Phaser.Scene {
       light.sprite.x =
         light.baseX +
         Math.sin(driftTime) * light.driftX +
-        Math.sin(driftTime * 0.43 + 1.2) * 4
+        Math.sin(driftTime * 0.43 + 1.2) * 9
       light.sprite.y =
         light.baseY +
         Math.cos(driftTime * 0.78) * light.driftY +
-        Math.sin(driftTime * 1.31) * 3
-      light.sprite.alpha = light.baseAlpha * (0.5 + pulse * 0.5) + sparkle * 0.34
-      light.sprite.setScale(light.baseScale * (0.9 + pulse * 0.22 + sparkle * 0.14))
+        Math.sin(driftTime * 1.31) * 7
+      light.sprite.alpha = light.baseAlpha * (0.62 + pulse * 0.5) + sparkle * 0.48
+      light.sprite.setScale(light.baseScale * (0.9 + pulse * 0.24 + sparkle * 0.16))
     })
 
   }
@@ -695,7 +699,10 @@ onBeforeUnmount(() => {
           v-if="result === true"
           class="progress-flower"
           :src="progressFlowerUrl"
-          :style="{ left: flowerSlots[index] }"
+          :style="{
+            '--flower-left': flowerSlots[index],
+            '--portrait-flower-left': portraitFlowerSlots[index],
+          }"
           alt="Tamamlanan soru"
         />
       </template>
@@ -841,10 +848,10 @@ body,
 }
 
 .game-logo {
-  top: 5.5%;
-  left: 37%;
-  width: 30%;
-  height: 27%;
+  top: -1.5%;
+  left: 34%;
+  width: 36%;
+  height: 33%;
   object-fit: contain;
   filter: drop-shadow(0 4px 2px rgb(75 43 16 / 0.2));
   transform: scaleX(1.12);
@@ -870,7 +877,7 @@ body,
 .progress-flower {
   z-index: 5;
   top: 25.1%;
-  left: 40.8%;
+  left: var(--flower-left, 40.8%);
   width: 5.5%;
   aspect-ratio: 1;
   object-fit: contain;
@@ -1013,17 +1020,17 @@ body,
 
 .answer-row {
   z-index: 4;
-  left: 27.5%;
-  bottom: 16.5%;
+  left: 25%;
+  bottom: 15.5%;
   display: flex;
-  gap: 2.8%;
-  width: 55%;
-  height: 16%;
+  gap: 2.3%;
+  width: 60%;
+  height: 18%;
 }
 
 .answer {
   position: relative;
-  width: 31.45%;
+  width: 31.8%;
   height: 100%;
   padding: 0;
   border: 0;
@@ -1052,7 +1059,7 @@ body,
   width: 80%;
   color: #5a260f;
   font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
-  font-size: calc(1.256cqw * var(--game-font-scale, 1));
+  font-size: calc(1.08cqw * var(--game-font-scale, 1));
   font-weight: 900;
   line-height: 1.08;
   text-align: center;
@@ -1193,6 +1200,12 @@ body,
   75% { transform: translate(0, -32%) rotate(-8deg); }
 }
 
+@media (orientation: landscape) and (min-aspect-ratio: 3 / 2) and (max-aspect-ratio: 5 / 3) {
+  .game-logo {
+    top: -5.5%;
+  }
+}
+
 @media (orientation: portrait) {
   .ui-stage,
   .butterfly-stage {
@@ -1218,6 +1231,7 @@ body,
 
   .progress-flower {
     top: 19%;
+    left: var(--portrait-flower-left, 25.25%);
     width: 7.5%;
   }
 
